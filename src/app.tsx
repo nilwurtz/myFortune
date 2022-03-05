@@ -2,6 +2,7 @@ import { FunctionComponent } from "preact";
 import { IndexPage } from "@/components/pages";
 import { Header } from "@/components/templates/header";
 import { APP_NAME } from "@/lib/config";
+import { Footer } from "@/components/templates/footer";
 
 export const App: FunctionComponent = () => {
   return (
@@ -10,6 +11,7 @@ export const App: FunctionComponent = () => {
       <main>
         <IndexPage />
       </main>
+      <Footer />
     </>
   );
 };
