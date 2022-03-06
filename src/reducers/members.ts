@@ -8,7 +8,7 @@ export type MembersState = {
 export type MembersAction =
   | {
       type: "load";
-      allMembers: Member[];
+      allMembers: readonly Member[];
       nonParticipateMemberIds: number[];
     }
   | {
