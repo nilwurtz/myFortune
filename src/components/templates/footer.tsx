@@ -11,5 +11,5 @@ export const Footer: FunctionComponent = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
