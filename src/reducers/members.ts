@@ -1,4 +1,5 @@
 import { Member, sortById } from "@/lib/members";
+import { stat } from "fs";
 
 export type MembersState = {
   participateMembers: Member[];
@@ -7,26 +8,30 @@ export type MembersState = {
 
 export type MembersAction =
   | {
-    type: "load";
-    allMembers: Member[];
-    nonParticipateMemberIds: number[];
-  }
+      type: "load";
+      allMembers: Member[];
+      nonParticipateMemberIds: number[];
+    }
   | {
-    type: "add";
-    memberId: number;
-  };
+      type: "add";
+      memberId: number;
+    }
+  | {
+      type: "delete";
+      memberId: number;
+    };
 
 export const membersReducer = (state: MembersState, action: MembersAction): MembersState => {
   switch (action.type) {
-    case "load": {
+    case "load":
       return {
         participateMembers: sortById(
           action.allMembers.filter((member) => !action.nonParticipateMemberIds.includes(member.id))
         ),
         selectedMembers: [],
       };
-    }
-    case "add": {
+
+    case "add":
       const addMember = state.participateMembers.find((member) => member.id === action.memberId);
       return {
         ...state,
@@ -34,7 +39,13 @@ export const membersReducer = (state: MembersState, action: MembersAction): Memb
           ? sortById([...state.selectedMembers, addMember])
           : state.selectedMembers,
       };
-    }
+
+    case "delete":
+      return {
+        ...state,
+        selectedMembers: state.selectedMembers.filter((member) => member.id !== action.memberId),
+      };
+
     default:
       return state;
   }

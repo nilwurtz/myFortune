@@ -132,7 +132,82 @@ describe("members reducer", () => {
           { id: 4, name: "ddd" },
           { id: 5, name: "eee" },
         ],
+        selectedMembers: [{ id: 5, name: "eee" }],
+      };
+
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("delete member", () => {
+    it("delete selected member", () => {
+      const initialState: MembersState = {
+        participateMembers: [
+          { id: 1, name: "aaa" },
+          { id: 2, name: "bbb" },
+          { id: 3, name: "ccc" },
+          { id: 4, name: "ddd" },
+          { id: 5, name: "eee" },
+        ],
         selectedMembers: [
+          { id: 3, name: "ccc" },
+          { id: 5, name: "eee" },
+        ],
+      };
+
+      const action: MembersAction = {
+        type: "delete",
+        memberId: 5,
+      };
+
+      const actual = membersReducer(initialState, action);
+
+      const expected: MembersState = {
+        participateMembers: [
+          { id: 1, name: "aaa" },
+          { id: 2, name: "bbb" },
+          { id: 3, name: "ccc" },
+          { id: 4, name: "ddd" },
+          { id: 5, name: "eee" },
+        ],
+        selectedMembers: [{ id: 3, name: "ccc" }],
+      };
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("delete non-selected member", () => {
+      const initialState: MembersState = {
+        participateMembers: [
+          { id: 1, name: "aaa" },
+          { id: 2, name: "bbb" },
+          { id: 3, name: "ccc" },
+          { id: 4, name: "ddd" },
+          { id: 5, name: "eee" },
+        ],
+        selectedMembers: [
+          { id: 3, name: "ccc" },
+          { id: 5, name: "eee" },
+        ],
+      };
+
+      const action: MembersAction = {
+        type: "delete",
+        memberId: 4,
+      };
+
+      const actual = membersReducer(initialState, action);
+
+      const expected: MembersState = {
+        participateMembers: [
+          { id: 1, name: "aaa" },
+          { id: 2, name: "bbb" },
+          { id: 3, name: "ccc" },
+          { id: 4, name: "ddd" },
+          { id: 5, name: "eee" },
+        ],
+        selectedMembers: [
+          { id: 3, name: "ccc" },
           { id: 5, name: "eee" },
         ],
       };
