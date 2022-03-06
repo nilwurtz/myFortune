@@ -1,5 +1,4 @@
 import { Member, sortById } from "@/lib/members";
-import { stat } from "fs";
 
 export type MembersState = {
   participateMembers: Member[];
@@ -31,7 +30,7 @@ export const membersReducer = (state: MembersState, action: MembersAction): Memb
         selectedMembers: [],
       };
 
-    case "add":
+    case "add": {
       const addMember = state.participateMembers.find((member) => member.id === action.memberId);
       return {
         ...state,
@@ -39,6 +38,7 @@ export const membersReducer = (state: MembersState, action: MembersAction): Memb
           ? sortById([...state.selectedMembers, addMember])
           : state.selectedMembers,
       };
+    }
 
     case "delete":
       return {
