@@ -1,4 +1,4 @@
-import { Member } from "@/lib/members";
+import { Member, sortById } from "@/lib/members";
 
 export type MembersState = {
   participateMembers: Member[];
@@ -12,19 +12,29 @@ export type MembersAction =
     nonParticipateMemberIds: number[];
   }
   | {
-    type: "selectMember";
-    memberId: number[];
+    type: "add";
+    memberId: number;
   };
 
 export const membersReducer = (state: MembersState, action: MembersAction): MembersState => {
   switch (action.type) {
-    case "load":
+    case "load": {
       return {
-        participateMembers: action.allMembers
-          .filter((member) => !action.nonParticipateMemberIds.includes(member.id))
-          .sort((a, b) => a.id - b.id),
+        participateMembers: sortById(
+          action.allMembers.filter((member) => !action.nonParticipateMemberIds.includes(member.id))
+        ),
         selectedMembers: [],
       };
+    }
+    case "add": {
+      const addMember = state.participateMembers.find((member) => member.id === action.memberId);
+      return {
+        ...state,
+        selectedMembers: addMember
+          ? sortById([...state.selectedMembers, addMember])
+          : state.selectedMembers,
+      };
+    }
     default:
       return state;
   }

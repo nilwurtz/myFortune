@@ -1,5 +1,9 @@
 export type Member = { id: number; name: string };
 
+export const sortById = <T extends { id: number }>(array: T[]): T[] => {
+  return array.slice().sort((a, b) => a.id - b.id);
+};
+
 export const MEMBERS: Readonly<Member[]> = [
   {
     id: 25,
