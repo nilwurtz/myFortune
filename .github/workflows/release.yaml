@@ -1,4 +1,4 @@
-name: release pipeline
+name: Release pipeline
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ env:
   NODE_VERSION: "17.6.0"
 
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
