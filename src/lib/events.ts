@@ -47,16 +47,6 @@ export type Greet = {
 
 export type GreetParts = 1 | 2 | 3 | 4 | 5 | 6;
 
-export const emptyGreet: Greet = { elected: 0, applied: 0 };
-export const emptyGreets: [Greet, Greet, Greet, Greet, Greet, Greet] = [
-  emptyGreet,
-  emptyGreet,
-  emptyGreet,
-  emptyGreet,
-  emptyGreet,
-  emptyGreet,
-];
-
 type SingleEvents = "4th";
 
 type Events = {
