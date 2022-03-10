@@ -15,8 +15,8 @@ export const IndexPage: FunctionComponent = () => {
     <div>
       <section>
         <div className="py-8 px-4">
-          {meets.meets.map((meet) => (
-            <div>
+          {meets.meets.map((meet, i) => (
+            <div key={i}>
               <FullYear
                 year={meet.date.year}
                 month={meet.date.month}
