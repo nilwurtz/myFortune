@@ -5,7 +5,7 @@ type Props = EventDate;
 
 export const FullYear: FunctionalComponent<Props> = (props) => {
   return (
-    <span>
+    <span className="text-sm">
       <span>{props.year}年</span>
       <span>{props.month}月</span>
       <span>{props.date}日</span>

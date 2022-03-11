@@ -1,5 +1,5 @@
 import { FunctionComponent } from "preact";
-import { IndexPage } from "@/components/pages";
+import { IndexPage } from "@/components/pages/index";
 import { Header } from "@/components/templates/header";
 import { APP_NAME } from "@/lib/config";
 import { Footer } from "@/components/templates/footer";
