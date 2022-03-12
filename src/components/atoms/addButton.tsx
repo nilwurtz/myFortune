@@ -7,7 +7,7 @@ type Props = {
 export const AddButton: FunctionComponent<Props> = (props) => {
   return (
     <button
-      className="w-6 h-6 text-center rounded-full border border-teal-400 text-teal-400 bg-white"
+      className="h-5 w-10 flex items-center text-center justify-center rounded-xl bg-white text-teal-400 border-2 border-teal-400 font-semibold"
       onClick={props.onClick}
     >
       +

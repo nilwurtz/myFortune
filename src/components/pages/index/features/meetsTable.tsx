@@ -1,3 +1,4 @@
+import { AddButton } from "@/components/atoms/addButton";
 import { FullYear } from "@/components/atoms/fullYear";
 import { EventDate, EVENTS, GreetParts } from "@/lib/events";
 import { meetsReducer, initialMeetsState, MeetState, GreetState, Action } from "@/reducers/meets";
@@ -61,13 +62,15 @@ const Greet: FunctionComponent<GreetProps> = (props) => {
     <div className="flex-1">
       <div className="p-2">
         <div className="text-sm text-gray-600">{props.part}部</div>
-        <div className="text-right">
+        <div className="mb-1 text-right">
           <span className="text-xl">{props.greet.elected}</span>
           <span className="ml-1 text-sm text-gray-600">枚</span>
         </div>
-        <button onClick={() => dispatch({ type: "add", part: props.part, date: props.date })}>
-          add
-        </button>
+        <div className="flex justify-center">
+          <AddButton
+            onClick={() => dispatch({ type: "add", part: props.part, date: props.date })}
+          />
+        </div>
       </div>
     </div>
   );
