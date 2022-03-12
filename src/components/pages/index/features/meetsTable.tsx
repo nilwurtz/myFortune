@@ -1,20 +1,17 @@
 import { AddButton, SubButton } from "@/components/atoms/buttons";
 import { FullYear } from "@/components/atoms/fullYear";
-import { EventDate, EVENTS, GreetParts } from "@/lib/events";
+import { useMeets } from "@/hooks/useMeets";
+import { EventDate, GreetParts } from "@/lib/events";
 import { meetsReducer, initialMeetsState, MeetState, GreetState, Action } from "@/reducers/meets";
 import { createContext, FunctionComponent } from "preact";
-import { useReducer, useEffect, useContext } from "preact/hooks";
+import { useContext } from "preact/hooks";
 
 // eslint-disable-next-line no-unused-vars
 type Dispatch = (_: Action) => void;
 const DispatchContext = createContext<Dispatch>(() => {});
 
 export const MeetsTable: FunctionComponent = () => {
-  const [meets, dispatch] = useReducer(meetsReducer, initialMeetsState);
-
-  useEffect(() => {
-    dispatch({ type: "init", dates: EVENTS["4th"].dates });
-  }, []);
+  const [meets, dispatch] = useMeets(meetsReducer, initialMeetsState);
 
   return (
     <DispatchContext.Provider value={dispatch}>
