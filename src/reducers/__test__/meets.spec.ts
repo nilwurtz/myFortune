@@ -419,4 +419,58 @@ describe("meetsReducer", () => {
       expect(actual).toEqual(expected);
     });
   });
+
+  describe("load action", () => {
+    it("Load whole state", () => {
+      const eventDate1: EventDate = {
+        year: 2022,
+        month: 3,
+        date: 1,
+        day: "日",
+      };
+
+      const eventDate2: EventDate = {
+        year: 2022,
+        month: 3,
+        date: 2,
+        day: "月",
+      };
+
+      const state: MeetsState = {
+        meets: [
+          {
+            date: eventDate1,
+            greets: [
+              { part: 1, greet: { elected: 0 } },
+              { part: 2, greet: { elected: 1 } },
+              { part: 3, greet: { elected: 0 } },
+              { part: 4, greet: { elected: 0 } },
+              { part: 5, greet: { elected: 1 } },
+              { part: 6, greet: { elected: 0 } },
+            ],
+          },
+          {
+            date: eventDate2,
+            greets: [
+              { part: 1, greet: { elected: 1 } },
+              { part: 2, greet: { elected: 0 } },
+              { part: 3, greet: { elected: 0 } },
+              { part: 4, greet: { elected: 0 } },
+              { part: 5, greet: { elected: 3 } },
+              { part: 6, greet: { elected: 0 } },
+            ],
+          },
+        ],
+      };
+
+      const action: Action = {
+        type: "load",
+        state,
+      };
+
+      const actual = meetsReducer(initialMeetsState, action);
+
+      expect(actual).toEqual(state);
+    });
+  });
 });

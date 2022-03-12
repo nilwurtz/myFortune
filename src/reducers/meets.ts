@@ -33,6 +33,10 @@ export type Action =
   | {
       type: "init";
       dates: EventDate[];
+    }
+  | {
+      type: "load";
+      state: MeetsState;
     };
 
 export const initialMeetsState: MeetsState = {
@@ -57,6 +61,10 @@ export const meetsReducer = (state: MeetsState, action: Action): MeetsState => {
           return meet;
         }),
       };
+    }
+
+    case "load": {
+      return action.state;
     }
 
     case "init": {
