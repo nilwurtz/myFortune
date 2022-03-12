@@ -1,6 +1,6 @@
 import { GreetsState, MeetState } from "@/reducers/meets";
 import { EventDate } from "@/lib/events";
-import { addOneElectedGreet, isSameEventDate } from "@/lib/meets";
+import { addOneElectedGreet, isSameEventDate, subOneElectedGreet } from "@/lib/meets";
 
 describe("#addOneElectedGreet", () => {
   const emptyGreets: GreetsState = [
@@ -11,7 +11,7 @@ describe("#addOneElectedGreet", () => {
     { part: 5, greet: { elected: 0 } },
     { part: 6, greet: { elected: 0 } },
   ];
-  it("add One to the part", () => {
+  it("Add one to the part", () => {
     const meet: MeetState = {
       date: {} as EventDate,
       greets: emptyGreets,
@@ -34,7 +34,7 @@ describe("#addOneElectedGreet", () => {
     expect(actual).toEqual(expected);
   });
 
-  it("add One to don't exists part", () => {
+  it("Add one to don't exists part", () => {
     const meet: MeetState = {
       date: {} as EventDate,
       greets: [
@@ -83,6 +83,93 @@ describe("#addOneElectedGreet", () => {
         { part: 1, greet: { elected: 0 } },
         { part: 2, greet: { elected: 0 } },
         { part: 3, greet: { elected: 3 } },
+        { part: 4, greet: { elected: 0 } },
+        { part: 5, greet: { elected: 0 } },
+        { part: 6, greet: { elected: 0 } },
+      ],
+    };
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("#subOneElectedGreet", () => {
+  const defaultGreets: GreetsState = [
+    { part: 1, greet: { elected: 1 } },
+    { part: 2, greet: { elected: 1 } },
+    { part: 3, greet: { elected: 1 } },
+    { part: 4, greet: { elected: 1 } },
+    { part: 5, greet: { elected: 1 } },
+    { part: 6, greet: { elected: 1 } },
+  ];
+  it("Subtract one to the part", () => {
+    const meet: MeetState = {
+      date: {} as EventDate,
+      greets: defaultGreets,
+    };
+
+    const actual = subOneElectedGreet(meet, 1);
+
+    const expected: MeetState = {
+      date: {} as EventDate,
+      greets: [
+        { part: 1, greet: { elected: 0 } },
+        { part: 2, greet: { elected: 1 } },
+        { part: 3, greet: { elected: 1 } },
+        { part: 4, greet: { elected: 1 } },
+        { part: 5, greet: { elected: 1 } },
+        { part: 6, greet: { elected: 1 } },
+      ],
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("Subtract one to don't exists part", () => {
+    const greets = [
+      { part: 1, greet: { elected: 1 } },
+      { part: 2, greet: { elected: 1 } },
+      { part: 4, greet: { elected: 1 } },
+      { part: 5, greet: { elected: 1 } },
+      { part: 6, greet: { elected: 1 } },
+    ] as GreetsState;
+
+    const meet: MeetState = {
+      date: {} as EventDate,
+      greets,
+    };
+
+    const actual = subOneElectedGreet(meet, 3);
+
+    const expected: MeetState = {
+      date: {} as EventDate,
+      greets,
+    };
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("Subtract zero value", () => {
+    const meet: MeetState = {
+      date: {} as EventDate,
+      greets: [
+        { part: 1, greet: { elected: 0 } },
+        { part: 2, greet: { elected: 0 } },
+        { part: 3, greet: { elected: 0 } },
+        { part: 4, greet: { elected: 0 } },
+        { part: 5, greet: { elected: 0 } },
+        { part: 6, greet: { elected: 0 } },
+      ],
+    };
+
+    const actual = subOneElectedGreet(meet, 3);
+
+    const expected: MeetState = {
+      date: {} as EventDate,
+      greets: [
+        { part: 1, greet: { elected: 0 } },
+        { part: 2, greet: { elected: 0 } },
+        { part: 3, greet: { elected: 0 } },
         { part: 4, greet: { elected: 0 } },
         { part: 5, greet: { elected: 0 } },
         { part: 6, greet: { elected: 0 } },

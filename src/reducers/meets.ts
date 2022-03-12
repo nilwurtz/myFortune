@@ -1,5 +1,5 @@
 import { EventDate, GreetParts } from "@/lib/events";
-import { addOneElectedGreet, isSameEventDate } from "@/lib/meets";
+import { addOneElectedGreet, isSameEventDate, subOneElectedGreet } from "@/lib/meets";
 
 export type GreetState = {
   elected: number;
@@ -26,6 +26,11 @@ export type Action =
       part: GreetParts;
     }
   | {
+      type: "sub";
+      date: EventDate;
+      part: GreetParts;
+    }
+  | {
       type: "init";
       dates: EventDate[];
     };
@@ -43,6 +48,15 @@ export const meetsReducer = (state: MeetsState, action: Action): MeetsState => {
       return {
         meets: state.meets.map((meet) => {
           if (isSameEventDate(meet.date, action.date)) return addOneElectedGreet(meet, action.part);
+          return meet;
+        }),
+      };
+    }
+
+    case "sub": {
+      return {
+        meets: state.meets.map((meet) => {
+          if (isSameEventDate(meet.date, action.date)) return subOneElectedGreet(meet, action.part);
           return meet;
         }),
       };
