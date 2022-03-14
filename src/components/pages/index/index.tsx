@@ -30,7 +30,7 @@ export const IndexPage: FunctionComponent = () => {
     <MeetsTableContext.Provider value={{ selectedGreet, setSelectedGreet, meets, dispatch }}>
       <div className="px-2">
         <div className="flex flex-center justify-center">
-          <div className="flex-1 max-w-xl">
+          <div className="flex-1 max-w-xl mb-16">
             <div className="py-4">
               <small>
                 該当の部を選択し、+、-で枚数を変更します。変更するたび、データが保存されます。
