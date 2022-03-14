@@ -1,26 +1,20 @@
 import { AddButton, SubButton } from "@/components/atoms/buttons";
 import { FullYear } from "@/components/atoms/fullYear";
-import { useMeets } from "@/hooks/useMeets";
 import { EventDate, GreetParts } from "@/lib/events";
-import { meetsReducer, initialMeetsState, MeetState, GreetState, Action } from "@/reducers/meets";
-import { createContext, FunctionComponent } from "preact";
+import { MeetState, GreetState } from "@/reducers/meets";
+import { FunctionComponent } from "preact";
 import { useContext } from "preact/hooks";
-
-// eslint-disable-next-line no-unused-vars
-type Dispatch = (_: Action) => void;
-const DispatchContext = createContext<Dispatch>(() => {});
+import { MeetsTableContext } from "@/components/pages/index/index";
 
 export const MeetsTable: FunctionComponent = () => {
-  const [meets, dispatch] = useMeets(meetsReducer, initialMeetsState);
+  const { meets } = useContext(MeetsTableContext);
 
   return (
-    <DispatchContext.Provider value={dispatch}>
-      <div>
-        {meets.meets.map((meet, i) => (
-          <Meet key={i} {...meet} />
-        ))}
-      </div>
-    </DispatchContext.Provider>
+    <div>
+      {meets.meets.map((meet, i) => (
+        <Meet key={i} {...meet} />
+      ))}
+    </div>
   );
 };
 
@@ -53,7 +47,7 @@ type GreetProps = {
 };
 
 const Greet: FunctionComponent<GreetProps> = (props) => {
-  const dispatch = useContext(DispatchContext);
+  const { dispatch } = useContext(MeetsTableContext);
 
   return (
     <div className="flex-1">
