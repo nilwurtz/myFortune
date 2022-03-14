@@ -11,6 +11,7 @@ export const useMeets = (reducer: typeof meetsReducer, initialMeetsState: MeetsS
       const item = window.localStorage.getItem(LOCAL_STORAGE_KEY);
       if (item) {
         const state = JSON.parse(item);
+        if (state["meets"].length === 0) throw Error("initialMeetsState saved to localStorage");
         dispatch({ type: "load", state });
       } else {
         dispatch({ type: "init", dates: EVENTS["4th"].dates });
@@ -22,6 +23,7 @@ export const useMeets = (reducer: typeof meetsReducer, initialMeetsState: MeetsS
   }, []);
 
   useEffect(() => {
+    if (meets.meets.length === 0) return;
     const stateString = JSON.stringify(meets);
     window.localStorage.setItem(LOCAL_STORAGE_KEY, stateString);
   }, [meets]);
