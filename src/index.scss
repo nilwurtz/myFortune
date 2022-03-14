@@ -12,6 +12,9 @@ h3 {
 a {
   @apply text-blue-500;
 }
+small {
+  @apply text-gray-500;
+}
 
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';

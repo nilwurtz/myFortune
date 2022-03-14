@@ -17,7 +17,7 @@ const BaseButton: FunctionComponent<Omit<JSX.HTMLAttributes<HTMLButtonElement>, 
 ) => {
   return (
     <button
-      className="h-5 w-10 flex items-center text-center justify-center rounded-xl bg-white text-teal-400 border-2 border-teal-400 font-semibold"
+      className="h-10 w-20 flex items-center text-center justify-center rounded-xl bg-white text-teal-400 border-2 text-xl border-teal-400 font-bold"
       {...props}
     >
       {props.children}
